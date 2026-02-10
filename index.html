@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+<meta charset="UTF-8">
+<title>GCD Calculator</title>
+<style>
+body { font-family: sans-serif; text-align: center; }
+input { margin: 5px; padding: 5px; }
+button { padding: 6px 12px; }
+.result { margin-top: 15px; }
+</style>
+</head>
+<body>
+
+<h2>حەلی GCD (هاوبەشترین دابەشکەر)</h2>
+
+<input type="number" id="a" placeholder="ژمارەی یەکەم">
+<input type="number" id="b" placeholder="ژمارەی دووەم">
+<br>
+<button onclick="calculate()">حەساب بکە</button>
+
+<div class="result" id="output"></div>
+
+<script>
+function calculate() {
+  let a = Number(document.getElementById("a").value);
+  let b = Number(document.getElementById("b").value);
+
+  if (a <= 0 || b <= 0) {
+    document.getElementById("output").innerHTML = "تکایە ژمارەی دروست بنووسە";
+    return;
+  }
+
+  let fa = [];
+  let fb = [];
+  let common = [];
+  let gcd = 1;
+
+  for (let i = 1; i <= a; i++)
+    if (a % i === 0) fa.push(i);
+
+  for (let i = 1; i <= b; i++)
+    if (b % i === 0) fb.push(i);
+
+  for (let i = 1; i <= a && i <= b; i++) {
+    if (a % i === 0 && b % i === 0) {
+      common.push(i);
+      gcd = i;
+    }
+  }
+
+  document.getElementById("output").innerHTML =
+    "Factors of " + a + ": " + fa.join(", ") + "<br>" +
+    "Factors of " + b + ": " + fb.join(", ") + "<br><br>" +
+    "Common factors: " + common.join(", ") + "<br><br>" +
+    "<b>GCD = " + gcd + "</b>";
+}
+</script>
+
+</body>
+</html>
